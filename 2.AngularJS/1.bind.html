@@ -6,11 +6,11 @@
     <script src="js/angular.min.js"></script>
 </head>
 <body>
-    <div ng-controller="bindCtr">
+    <div ng-controller="bindCtrl">
         单项绑定 渲染非UI:{{content}}
     </div>
     <hr>
-    <div ng-controller="modalCtr">
+    <div ng-controller="modalCtrl">
 
         双向数据绑定 渲染UI: <br>
         电话:<input ng-model="phoneVal" ng-pattern="/^\d+$/" name="phone" class="my-input"
@@ -23,10 +23,10 @@
 </html>
 <script>
     angular.module('myApp',[]);
-    angular.module('myApp').controller('bindCtr',function ($scope) {
+    angular.module('myApp').controller('bindCtrl',function ($scope) {
         $scope.content='angularJs.'
     });
-    angular.module('myApp').controller('modalCtr',function ($scope) {
+    angular.module('myApp').controller('modalCtrl',function ($scope) {
         $scope.phoneVal='';
         $scope.showVal=function () {
             alert($scope.phoneVal?$scope.phoneVal:'空')
