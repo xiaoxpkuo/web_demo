@@ -25,15 +25,15 @@
     },
     toolbox: {
       feature: {
-        restore: {},
-        saveAsImage: {}
+        restore: {},  //还原图表，各种状态均被清除，还原为最初展现时的状态。
+        saveAsImage: {}  //保存图片（IE8-不支持）
       }
     },
     series: [
       {
         name: '业务指标',
         type: 'gauge',
-        detail: {formatter:'{value}%'},
+        detail: {formatter:'{value}%'},  //仪表盘详情, formatter 可以格式化文本
         data: [{value: 50, name: '完成率'}]
       }
     ]

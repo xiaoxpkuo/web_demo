@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <style media="screen">
+        #container {
+            width: 1000px;
+            height: 800px;
+        }
+    </style>
+    <script type="text/javascript" src="js/echarts.min.js"></script>
+</head>
+<body>
+<!-- 1234 -->
+<div id="container">
+
+</div>
+</body>
+</html>
+<script type="text/javascript">
+    var lineAndBarChart = echarts.init(document.getElementById('container')),option;  // 基于准备好的dom，初始化echarts图表
+        var option = {
+            title : {
+                text: '期末成绩区间对应人数柱形图',
+                subtext: '折线图加柱形图demo'
+            },
+            tooltip: {   //提示框
+                show: true
+            },
+            legend: {      //图例
+                data:['人数']
+            },
+            xAxis : [         //横轴数组
+                {
+                    type : 'category',   //坐标轴类型：类目型
+                    data : ["100 ~ 96(分)","95 ~ 91(分)","90 ~ 81(分)","80 ~ 71(分)","70 ~ 61(分)","60及以下"]  //数据
+                }
+            ],
+            yAxis : [
+                {
+                    type : 'value'
+                }
+            ],
+            series : [
+                {
+                    "name":"人数",
+                    "type":"line",   //折线图
+                    "data":[5, 20, 40, 25, 15, 3]
+                },
+                {
+                    "name":"人数",
+                    "type":"bar",   //柱状图
+                    "data":[5, 20, 40, 25, 15, 3]
+                }
+            ]
+        };
+    lineAndBarChart.setOption(option);
+</script>
