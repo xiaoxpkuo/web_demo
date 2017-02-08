@@ -22,7 +22,7 @@
     option = {
         color: ['#3398DB'],
         tooltip : {
-            trigger: 'axis',
+            trigger: 'axis',   //触发类型，可选为：'item' | 'axis'
             axisPointer : {            // 坐标轴指示器，坐标轴触发有效
                 type : 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
             }
@@ -50,8 +50,8 @@
         series : [
             {
                 name:'count',
-                type:'bar',
-                barWidth: '60%',
+                type:'bar',   //柱状图
+                barWidth: '60%',  //柱条宽度
                 data:[10, 52, 200, 334, 390, 330, 220]
             }
         ]

@@ -423,21 +423,21 @@
     backgroundColor: '#404a59',
     title: {
       text: '全国主要城市空气质量',
-      subtext: 'data from PM25.in',
-      sublink: 'http://www.pm25.in',
+      subtext: 'data from PM25.in',  //副标题文本，'\n'指定换行
+      sublink: 'http://www.pm25.in',   //副标题文本超链接
       left: 'center',
-      textStyle: {
+      textStyle: {   //主标题文本样式
         color: '#fff'
       }
     },
     tooltip : {
       trigger: 'item'
     },
-    legend: {
-      orient: 'vertical',
-      y: 'bottom',
-      x:'right',
-      data:['pm2.5'],
+    legend: {   ////图例
+      orient: 'vertical',  //布局方式，可选为：'horizontal' | 'vertical'
+      y: 'bottom',  //垂直安放位置，默认为全图顶端，可选为：'top' | 'bottom' | 'center' | {number}（y坐标，单位px）
+      x:'right',  //水平安放位置，默认为全图居中，可选为：'center' | 'left' | 'right' | {number}（x坐标，单位px）
+      data:['pm2.5'],  //图例内容数组
       textStyle: {
         color: '#fff'
       }
@@ -463,15 +463,15 @@
     series : [
       {
         name: 'pm2.5',
-        type: 'scatter',
+        type: 'scatter',  //图表类型：散点图
         coordinateSystem: 'geo',
         data: convertData(data),
         symbolSize: function (val) {
           return val[2] / 10;
-        },
-        label: {
+        }, 
+        label: {   //时间轴标签文本
           normal: {
-            formatter: '{b}',
+            formatter: '{b}',  //间隔名称格式器
             position: 'right',
             show: false
           },
