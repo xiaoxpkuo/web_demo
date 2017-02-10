@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="js/angular.min.js"></script>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+</head>
+<body>
+    <div ng-app="app" ng-controller="appController">
+    <table>
+        <thead>
+        <tr>
+            <th>序号</th>
+            <th>内容</th>
+            <th>姓名</th>
+            <th>地点</th>
+            <th>时间</th>
+            <th ng-click="toggleSort()">序号</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="x in obj">
+            <td ng-if="$index + 1 === 1" style="color: red">{{$index + 1}}</td>
+            <td ng-if="$index + 1 === 2" style="color: green">{{$index + 1}}</td>
+            <td ng-if="$index + 1 === 3" style="color: yellow">{{$index + 1}}</td>
+            <td ng-if="$index + 1 > 3">{{$index + 1}}</td>
+            <td>{{x.Name}}</td>
+            <td>{{x.City}}</td>
+            <td>{{x.Country}}</td>
+            <td>{{x.Country + x.City}}</td>
+            <td>{{x.id}}</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
+<script>
+    var app = angular.module('app', []);
+    app.controller('appController', function($scope, $http) {
+
+        $scope.sortIsAsc = true;
+
+        //数据
+        $scope.obj = [
+            {
+                "Name": "Alfreds Futterkiste",
+                "City": "Berlin",
+                "Country": "Germany",
+                "id": 4
+            },
+            {
+                "Name": "Ana Trujillo Emparedados y helados",
+                "City": "México D.F.",
+                "Country": "Mexico",
+                "id": 3
+            },
+            {
+                "Name": "Comércio Mineiro",
+                "City": "São Paulo",
+                "Country": "Brazil",
+                "id": 2
+            }, {
+                "Name": "Ana Trujillo Emparedados y helados",
+                "City": "México D.F.",
+                "Country": "Mexico",
+                "id": 5
+            }
+        ];
+
+        $scope.toggleSort = function(){
+            $scope.sortIsAsc = !$scope.sortIsAsc;
+            $scope.obj.sort(function(a, b){
+                if($scope.sortIsAsc){
+                    if (a.id < b.id) {
+                        return -1;
+                    }
+                    if (a.id === b.id) {
+                        return 0;
+                    }
+                    return 1;
+                }
+                if (a.id > b.id) {
+                    return -1;
+                }
+                if (a.id === b.id) {
+                    return 0;
+                }
+                return 1;
+            });
+        };
+    });
+</script>
