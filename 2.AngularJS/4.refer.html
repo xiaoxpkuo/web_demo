@@ -140,10 +140,10 @@ angular.module('myApp', []).controller('userCtrl', function($scope) {
     }
 
 
-    $scope.$watch('passw1',function() {$scope.test();});
-    $scope.$watch('passw2',function() {$scope.test();});
-    $scope.$watch('fName', function() {$scope.test();});
-    $scope.$watch('lName', function() {$scope.test();});
+    $scope.$watch('passw1 + passw2 + passw2 + lName',function() {$scope.test();});
+    // $scope.$watch('passw2',function() {$scope.test();});
+    // $scope.$watch('fName', function() {$scope.test();});
+    // $scope.$watch('lName', function() {$scope.test();});
 
     $scope.test = function() {
       if ($scope.passw1 !== $scope.passw2) {
@@ -152,8 +152,17 @@ angular.module('myApp', []).controller('userCtrl', function($scope) {
         $scope.error = false;
       }
       $scope.incomplete = false;
+      // if ($scope.edit && 
+      //    (!$scope.fName.length || !$scope.lName.length || !$scope.passw1.length || !$scope.passw2.length)) {
+      //    $scope.incomplete = true;
+      // }
+      // if ($scope.edit && 
+      //    (!$scope.fName.length || !$scope.lName.length || !$scope.passw1.length || !$scope.passw2.length)) {
+      //    $scope.incomplete = true;
+      // }
       if ($scope.edit && 
-         (!$scope.fName.length || !$scope.lName.length || !$scope.passw1.length || !$scope.passw2.length)) {
+         ($scope.fName.length>0 && $scope.lName.length>0 && $scope.passw1.length>0 && $scope.passw2.length>0)) {
+        console.log(($scope.fName.length>0 && $scope.lName.length>0 && $scope.passw1.length>0 && $scope.passw2.length>0));
          $scope.incomplete = true;
       }
     };
