@@ -22,7 +22,7 @@
       <tbody>
         <tr ng-repeat="user in users">
           <td>
-            <button class="btn" ng-click="editUser(user.id)">
+            <button class="btn" ng-click="modify(user.id)">
               <span class="glyphicon glyphicon-pencil"></span>编辑
             </button>
           </td>
@@ -33,7 +33,7 @@
     </table>
 
     <hr>
-    <button class="btn btn-success" ng-click="editUser('new')">
+    <button class="btn btn-success" ng-click="add()">
       <span class="glyphicon glyphicon-user"></span>创建新用户
     </button>
     <hr>
@@ -42,132 +42,159 @@
     <h3 ng-hide="edit">编辑用户:</h3>
 
     <form class="form-horizontal">
-    <div class="form-group" style="display: none;">
+      <div class="form-group" style="display: none;">
         <label class="col-sm-2 control-label">id:</label>
         <div class="col-sm-10">
-        <input type="text" ng-model="id" placeholder="id">
+        <input type="text" ng-model="userInfo.id" placeholder="id">
         </div>
       </div> 
       <div class="form-group">
         <label class="col-sm-2 control-label">名:</label>
         <div class="col-sm-10">
-        <input type="text" ng-model="fName" placeholder="名">
+        <input type="text" ng-model="userInfo.fName" placeholder="名">
         </div>
       </div> 
       <div class="form-group">
         <label class="col-sm-2 control-label">姓:</label>
         <div class="col-sm-10">
-        <input type="text" ng-model="lName" ng-disabled="!edit" placeholder="姓">
+        <input type="text" ng-model="userInfo.lName" ng-disabled="!edit" placeholder="姓">
         </div>
       </div>
       <div class="form-group">
         <label class="col-sm-2 control-label">密码:</label>
         <div class="col-sm-10">
-        <input type="password" ng-model="passw1" placeholder="密码">
+        <input type="password" ng-model="userInfo.passw1" placeholder="密码">
         </div>
       </div>
       <div class="form-group">
         <label class="col-sm-2 control-label">重复密码:</label>
         <div class="col-sm-10">
-        <input type="password" ng-model="passw2" placeholder="重复密码">
+        <input type="password" ng-model="userInfo.passw2" placeholder="重复密码">
         </div>
       </div>
     </form>
 
     <hr>
     <button class="btn btn-success" ng-click="save()" ng-disabled="error || incomplete">
-    <span class="glyphicon glyphicon-save"></span>修改
+    <span class="glyphicon glyphicon-save"></span>保存
     </button>
-
+   
   </div>
+  
 
 <!-- <script src="myUsers.js"></script> -->
 <script type="text/javascript">
-angular.module('myApp', []).controller('userCtrl', function($scope) {
-    $scope.fName = '';
-    $scope.lName = '';
-    $scope.passw1 = '';
-    $scope.passw2 = '';
-    $scope.usernum = 6;
+var app=angular.module('myApp', []);
+// app.service('hexafy',function(){
+//   this.fun=function(x){
+//     return x.toString(16);
+//   }
+// })
+
+// app.filter('fix',function(hexafy){
+//   return function(a){
+//       return hexafy.fun(a);
+//   }
+// })
+app.factory('userDeal',function(){
+  var dealInfo = {};
+  var person={
+    "id":"",
+    "fName":"",
+    "lName":"",
+    "passw1":"",
+    "passw2":""
+  };
+  var nownum=6;
+  dealInfo.add = function(){
+    return person;
+  }
+  dealInfo.modify = function(user){
+    var personNew=user;
+    personNew.fName = user.fName;
+    personNew.lName = user.lName; 
+    personNew.id = user.id;
+    return angular.extend({},personNew); 
+  }
+  dealInfo.clear = function(){
+    return person;
+  }
+  dealInfo.save = function(user,edit){
+    var personNew=user;
+    if(edit){
+      nownum++;
+      personNew.id = nownum;
+    }
+    return angular.extend({},personNew);
+  }
+  return dealInfo;
+})
+app.controller('userCtrl', function($scope,userDeal) {
+    $scope.userInfo={
+      "fName":"",
+      "lName":"",
+      "passw1":"",
+      "passw2":""
+    }
+
     $scope.users = [
-      {id:1, fName:'Hege', lName:"Pege" },
-      {id:2, fName:'Kim',  lName:"Pim" },
+      {id:1, fName:'Hege', lName:"Pege" },//person
+      {id:2, fName:'Kim',  lName:"Pim" },// person.name =
       {id:3, fName:'Sal',  lName:"Smith" },
       {id:4, fName:'Jack', lName:"Jones" },
       {id:5, fName:'John', lName:"Doe" },
       {id:6, fName:'Peter',lName:"Pan" }
     ];
+
     $scope.edit = true;
     $scope.error = false;
     $scope.incomplete = false; 
 
-    $scope.editUser = function(id) {
-      if (id == 'new') {
-          $scope.edit = true;
-          $scope.incomplete = true;
-          $scope.clear();
-        } else {
-          $scope.edit = false;
-          $scope.fName = $scope.users[id-1].fName;
-          $scope.lName = $scope.users[id-1].lName; 
-          $scope.id = $scope.users[id-1].id; 
-      }
+    // 增加用户
+    $scope.add = function(){
+      $scope.edit = true;
+      $scope.incomplete = true;
+      $scope.userInfo = userDeal.add();
     };
-    $scope.clear =function(){
-      $scope.fName = '';
-      $scope.lName = '';
-      $scope.passw1 = '';
-      $scope.passw2 = '';
+    $scope.modify = function(id){
+      $scope.edit = false;
+      $scope.userInfo = userDeal.modify($scope.users[id-1]);
+
     }
+
     $scope.save = function(){
-      $scope.usernum++;
-      if($scope.edit){
-        var newUser={
-          "id":$scope.usernum,
-          "fName":$scope.fName,
-          "lName":$scope.lName
-        }
-        $scope.users.push(newUser);
-        $scope.clear();
-      }else{
-        for(var i=0;i<$scope.users.length;i++){
-          if($scope.users[i].id==$scope.id){
-              $scope.users[i].fName=$scope.fName;
-              $scope.users[i].lName=$scope.lName;
+      var nowInfo=$scope.userInfo;
+      var newuser=userDeal.save(nowInfo,$scope.edit);
+          for(var i=0;i<$scope.users.length;i++){
+            if($scope.users[i].id == newuser.id){
+                $scope.users[i] = newuser;
+                return;
+            }
           }
-        }
-      }
+      $scope.users.push(newuser);
+      $scope.userInfo = userDeal.clear();
     }
 
-
-    $scope.$watch('passw1 + passw2 + passw2 + lName',function() {$scope.test();});
-    // $scope.$watch('passw2',function() {$scope.test();});
-    // $scope.$watch('fName', function() {$scope.test();});
-    // $scope.$watch('lName', function() {$scope.test();});
-
-    $scope.test = function() {
-      if ($scope.passw1 !== $scope.passw2) {
-        $scope.error = true;
-        } else {
-        $scope.error = false;
+    var unbindwatch = $scope.$watch('userInfo.fName + userInfo.lName + userInfo.passw1 + userInfo.passw2',function(){
+      $scope.confirmPassword();
+      if(!$scope.error && !$scope.incomplete){
+        unbindwatch();
       }
+    })
+
+    $scope.confirmPassword = function(){
+      $scope.error = $scope.userInfo.passw1 !== $scope.userInfo.passw2;
       $scope.incomplete = false;
-      // if ($scope.edit && 
-      //    (!$scope.fName.length || !$scope.lName.length || !$scope.passw1.length || !$scope.passw2.length)) {
-      //    $scope.incomplete = true;
-      // }
-      // if ($scope.edit && 
-      //    (!$scope.fName.length || !$scope.lName.length || !$scope.passw1.length || !$scope.passw2.length)) {
-      //    $scope.incomplete = true;
-      // }
-      if ($scope.edit && 
-         ($scope.fName.length>0 && $scope.lName.length>0 && $scope.passw1.length>0 && $scope.passw2.length>0)) {
-        console.log(($scope.fName.length>0 && $scope.lName.length>0 && $scope.passw1.length>0 && $scope.passw2.length>0));
-         $scope.incomplete = true;
+      var hasfName = $scope.userInfo.fName.length < 1;
+      var haslName = $scope.userInfo.lName.length < 1;
+      var hasPassword1 = $scope.userInfo.passw1.length < 1;
+      var hasPassword2 = $scope.userInfo.passw2.length < 1;
+      if($scope.edit && (hasfName || haslName || hasPassword1 || hasPassword2)){
+          $scope.incomplete = true;
       }
-    };
-
+    }
 });
+
 </script>
 
 </body>
