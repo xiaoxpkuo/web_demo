@@ -19,11 +19,13 @@
 </body>
 </html>
 <script type="text/javascript">
-    var lineAndBarChart = echarts.init(document.getElementById('container')),option;  // 基于准备好的dom，初始化echarts图表
-        var option = {
+    var bardata = { X_data:["100~96(分)","95~91(分)","90~81(分)","80~71(分)","70~61(分)","60及以下"], Y_data:[5, 20, 40, 15, 10, 3] };  //X轴、Y轴的数据通过ajax请求从后台获取,可以按照需求更新data变量的值。
+    function echart (data){
+        var myEchart = echarts.init(document.getElementById('container'));
+        var option = {    //option,根据需求要插入的图表类型进行修改
             title : {
-                text: '期末成绩区间对应人数柱形图',
-                subtext: '折线图加柱形图demo'
+                text: '期末成绩对应人数统计',
+                subtext: 'demo'
             },
             tooltip: {   //提示框
                 show: true
@@ -34,7 +36,7 @@
             xAxis : [         //横轴数组
                 {
                     type : 'category',   //坐标轴类型：类目型
-                    data : ["100 ~ 96(分)","95 ~ 91(分)","90 ~ 81(分)","80 ~ 71(分)","70 ~ 61(分)","60及以下"]  //数据
+                    data : data.X_data  //数据
                 }
             ],
             yAxis : [
@@ -45,15 +47,17 @@
             series : [
                 {
                     "name":"人数",
-                    "type":"line",   //折线图
-                    "data":[5, 20, 40, 25, 15, 3]
+                    "type":"bar",   //柱状图
+                    "data": data.Y_data
                 },
                 {
                     "name":"人数",
-                    "type":"bar",   //柱状图
-                    "data":[5, 20, 40, 25, 15, 3]
+                    "type":"line",   //柱状图
+                    "data": data.Y_data
                 }
             ]
         };
-    lineAndBarChart.setOption(option);
+        myEchart.setOption(option); 
+    }
+    echart(bardata);
 </script>
