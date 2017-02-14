@@ -19,8 +19,7 @@
 </body>
 </html>
 <script type="text/javascript">
-  var mapChart = echarts.init(document.getElementById('container')),option;
-  var data = [
+  var mapdata = [
     {name: '海门', value: 9},
     {name: '鄂尔多斯', value: 12},
     {name: '招远', value: 12},
@@ -212,7 +211,9 @@
     {name: '武汉', value: 273},
     {name: '大庆', value: 279}
   ];
-  var geoCoordMap = {
+  function echart (data){
+    var myEchart = echarts.init(document.getElementById('container'));
+    var geoCoordMap = {   //全国城市坐标
     '海门':[121.15,31.89],
     '鄂尔多斯':[109.781327,39.608266],
     '招远':[120.38,37.35],
@@ -303,7 +304,7 @@
     '长春':[125.35,43.88],
     '胶州':[120.03336,36.264622],
     '银川':[106.27,38.47],
-    '张家港':[120.555821,31.875428],
+    '张家港':[120.555821,31.875428], 
     '三门峡':[111.19,34.76],
     '锦州':[121.15,41.13],
     '南昌':[115.89,28.68],
@@ -468,7 +469,7 @@
         data: convertData(data),
         symbolSize: function (val) {
           return val[2] / 10;
-        }, 
+        },
         label: {   //时间轴标签文本
           normal: {
             formatter: '{b}',  //间隔名称格式器
@@ -519,5 +520,8 @@
     ]
   };
 
-  mapChart.setOption(option);
+  myEchart.setOption(option);
+  }
+
+  echart(mapdata);
 </script>

@@ -18,44 +18,40 @@
 </body>
 </html>
 <script type="text/javascript">
-    var barChart = echarts.init(document.getElementById('container')),option;
-    option = {
-        color: ['#3398DB'],
-        tooltip : {
-            trigger: 'axis',   //触发类型，可选为：'item' | 'axis'
-            axisPointer : {            // 坐标轴指示器，坐标轴触发有效
-                type : 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
-            }
-        },
-        grid: {
-            left: '3%',
-            right: '4%',
-            bottom: '3%',
-            containLabel: true
-        },
-        xAxis : [
-            {
-                type : 'category',
-                data : ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
-                axisTick: {
-                    alignWithLabel: true
+    var bardata = { X_data:["100~96(分)","95~91(分)","90~81(分)","80~71(分)","70~61(分)","60及以下"], Y_data:[5, 20, 40, 15, 10, 3] };  //X轴、Y轴的数据通过ajax请求从后台获取,可以按照需求更新data变量的值。
+    function echart (data){
+        var myEchart = echarts.init(document.getElementById('container'));
+        var option = {    //option,根据需求要插入的图表类型进行修改
+            title : {
+                text: '期末成绩对应人数统计',
+                subtext: 'demo'
+            },
+            tooltip: {   //提示框
+                show: true
+            },
+            legend: {      //图例
+                data:['人数']
+            },
+            xAxis : [         //横轴数组
+                {
+                    type : 'category',   //坐标轴类型：类目型
+                    data : data.X_data  //数据
                 }
-            }
-        ],
-        yAxis : [
-            {
-                type : 'value'
-            }
-        ],
-        series : [
-            {
-                name:'count',
-                type:'bar',   //柱状图
-                barWidth: '60%',  //柱条宽度
-                data:[10, 52, 200, 334, 390, 330, 220]
-            }
-        ]
-    };
-
-    barChart.setOption(option);
+            ],
+            yAxis : [
+                {
+                    type : 'value'
+                }
+            ],
+            series : [
+                {
+                    "name":"人数",
+                    "type":"bar",   //柱状图
+                    "data": data.Y_data
+                },
+            ]
+        };
+        myEchart.setOption(option); 
+    }
+    echart(bardata);
 </script>

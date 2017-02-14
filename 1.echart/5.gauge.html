@@ -18,30 +18,36 @@
 </body>
 </html>
 <script type="text/javascript">
-  var gaugeChart = echarts.init(document.getElementById('container')),option;
-  option = {
-    tooltip : {
-      formatter: "{a} <br/>{b} : {c}%"
-    },
-    toolbox: {
-      feature: {
-        restore: {},  //还原图表，各种状态均被清除，还原为最初展现时的状态。
-        saveAsImage: {}  //保存图片（IE8-不支持）
-      }
-    },
-    series: [
-      {
-        name: '业务指标',
-        type: 'gauge',
-        detail: {formatter:'{value}%'},  //仪表盘详情, formatter 可以格式化文本
-        data: [{value: 50, name: '完成率'}]
-      }
-    ]
-  };
+  var gaugedata = [{value: 70, name: '完成率'}];
+  function echart (data){
+      var myEchart = echarts.init(document.getElementById('container')),option;
+      var option = {
+            tooltip : {
+            formatter: "{a} <br/>{b} : {c}%"
+        },
+        toolbox: {
+          feature: {
+            restore: {},  //还原图表，各种状态均被清除，还原为最初展现时的状态。
+            saveAsImage: {}  //保存图片（IE8-不支持）
+          }
+        },
+        series: [
+          {
+            name: '业务指标',
+            type: 'gauge',
+            detail: {formatter:'{value}%'},  //仪表盘详情, formatter 可以格式化文本
+            data: gaugedata
+          }
+        ]
+      };
+      myEchart.setOption(option); 
+    }
 
-  setInterval(function () {
-    option.series[0].data[0].value = (Math.random() * 100).toFixed(2) - 0;
-    gaugeChart.setOption(option, true);
-  },3000);
+    echart(gaugedata);
+
+    setInterval(function () {
+      option.series[0].data[0].value = (Math.random() * 100).toFixed(2) - 0;
+      gaugeChart.setOption(option, true);
+    },3000);
 
 </script>
