@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="js/vue.min.js"></script>
+    <link rel="stylesheet" href="css/index.css">
+    <style>body{padding: 20px}.active{background: blue;color: white;}</style>
+</head>
+<body>
+    <div id="app-3">
+        <ol>
+            <todo-item v-for="item in groceryList" v-bind:todo="item"></todo-item>
+        </ol>
+    </div>
+    <hr>
+    <div id="app">
+        <ul class="pagination">
+            <li v-for="n in count">
+                <a href="#" v-bind:class="cur === n ? 'active' : '' ">{{n}}</a>
+            </li>
+        </ul>
+    </div>
+    <hr>
+    <div id="app-2">
+        <h1 v-if="flagIf">内容1</h1>
+        <h1 v-if="flagIf2">内容2</h1>
+        <h1 v-show="flagShow">内容3</h1>
+        <h1 v-show="flagShow2">内容4</h1>
+    </div>
+</body>
+</html>
+    <script>
+        Vue.component('todo-item',{
+            props:['todo'],
+            template:"<li>{{todo.text}}</li>"
+        });
+        var app7=new Vue({
+            el:'#app-3',
+            data:{
+                groceryList:[
+                    {text:"Vegetables"},
+                    {text:"cheese"},
+                    {text:"Whatever"}
+                ]
+            }
+        });
+
+
+        var app=new Vue({
+            el:'#app',
+            data:{
+                count:10,
+                cur:1
+            }
+        });
+
+        var app2=new Vue({
+            el:'#app-2',
+            data:{
+                flagIf:true,
+                flagIf2:false,
+                flagShow:true,
+                flagShow2:false
+            }
+        });
+    </script>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Vue validate</title>
+<script src="js/jquery.min.js"></script>
+<script src="js/vue.min.js"></script>
+<script src="js/validate.js"></script>
+<style>
+.rong-form-error {
+    color: #f00;
+}
+</style>
+</head>
+
+<body>
+
+<form id="form" action="" @submit.prevent="submit">
+    <h1>校验结果 {{result}}</h1>
+    <ul>
+        <li>
+            <label>原密码：</label>
+            <input name="oldPassword" v-model="oldPassword" type="password" class="rong-field"
+                data-rule-required="true" data-message-required="请输入原密码">
+            <div v-if="errors.oldPassword" class="rong-form-error">{{errors.oldPassword}}</div>
+        </li>
+        <li>
+            <label>新密码：</label>
+            <input name="newPassword" v-model="newPassword" type="password" class="rong-field"
+                data-rule-required="true" data-message-required="请输入密码"
+                data-rule-rangelength="6,20" data-message-rangelength="密码长度为6-20位">
+            <div v-if="errors.newPassword" class="rong-form-error">{{errors.newPassword}}</div>
+        </li>
+        <li>
+            <label>确认密码：</label>
+            <input name="confirmPassword" v-model="confirmPassword" type="password" class="rong-field"
+                data-rule-required="true" data-message-required="请再次输入密码"
+                data-rule-equalto="[name=newPassword]" data-message-equalto="两次密码输入不一致">
+            <div v-if="errors.confirmPassword" class="rong-form-error">{{errors.confirmPassword}}</div>
+        </li>
+        <li class="rong-setting-submit">
+            <button class="rong-button rong-submit" type="submit">确定</button>
+        </li>
+    </ul>
+</form>
+
+<script>
+new Vue({
+    el: '#form',
+    data: {
+        result: false,
+        oldPassword: null,
+        newPassword: null,
+        confirmPassword: null
+    },
+    mixins: [getValidate()],
+    methods: {
+        submit: function () {
+            this.result = this.valid();
+        }
+    }
+});
+</script>
+
+</body>
+</html>

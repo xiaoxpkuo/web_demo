@@ -16,9 +16,10 @@
 <div id="container">
 
 </div>
-</body>
+</body>git
 </html>
 <script type="text/javascript">
+<<<<<<< HEAD
     var linelegend = ['邮件营销', '联盟广告', '视频广告', '直接访问', '搜索引擎'];
     var linedata = { X_data:['周一', '周二', '周三', '周四', '周五', '周六', '周日'],Y_data:{'邮件营销':[120, 132, 101, 134, 90, 230, 210],'联盟广告':[220, 182, 191, 234, 290, 330, 310],'视频广告':[150, 232, 201, 154, 190, 330, 410],'直接访问':[320, 332, 301, 334, 390, 330, 320],'搜索引擎':[820, 932, 901, 934, 1290, 1330, 1320]}};
     function echart (data,legend){   
@@ -37,6 +38,74 @@
                 feature: {
                     saveAsImage: {}
                 }
+=======
+
+    var lineChart = echarts.init(document.getElementById('container')),option;  // 基于准备好的dom，初始化echarts图表
+    option = {
+        title: {    //标题
+            text: '堆叠区域图'
+        },
+        tooltip: {   //提示框
+            trigger: 'axis'  //触发类型，默认数据触发
+        },
+        legend: {   //图例
+            data: ['邮件营销', '联盟广告', '视频广告', '直接访问', '搜索引擎']   //根据该值索引series中同名系列所用的图表类型和itemStyle，如果索引不到，该item将默认为没启用状态。 
+        },
+        toolbox: {  //工具箱
+            feature: {
+                saveAsImage: {}
+            }
+        },
+        grid: {   //直角坐标系内绘图网格
+            left: '3%',
+            right: '4%',
+            bottom: '3%',
+            containLabel: true
+        },
+        xAxis: [   //横轴数组
+            {
+                type: 'category',   //类型为类目型
+                boundaryGap: false,   //类目起始和结束两端空白策略
+                data: ['周一', '周二', '周三', '周四', '周五', '周六', '周日'] //类目列表，同时也是label内容
+            }
+        ],
+        yAxis: [  //纵轴数组
+            {
+                type: 'value'
+            }
+        ],
+        series: [   //驱动图表生成的数据内容
+            {
+<<<<<<< HEAD
+                name: '邮件营销',
+                type: 'line',
+                stack: '总量',
+                data: [null, null, null, null, null, null, null]
+=======
+                name: '邮件营销',  //系列名称
+                type: 'line',   //图表类型
+                stack: '总量',  //组合名称，双数值轴时无效，多组数据的堆积图时使用，eg：stack:'group1'，则series数组中stack值等于'group1'的数据做堆积计算   （适用于折线图，柱状图）
+                data: [120, 132, 101, 134, 90, 230, 210]  //数据
+>>>>>>> 87ddd051f383511f42359a056369b4fa463442d3
+            },
+            {
+                name: '联盟广告',
+                type: 'line',
+                stack: '总量',
+                data: [null, null, null, null, null, null, null]
+            },
+            {
+                name: '视频广告',
+                type: 'line',
+                stack: '总量',
+                data: [null, null, null, null, null, null, null]
+            },
+            {
+                name: '直接访问',
+                type: 'line',
+                stack: '总量',
+                data: [null, null, null, null, null, null, null]
+>>>>>>> xiaoxpkuo/master
             },
             grid: {   //直角坐标系内绘图网格
                 left: '3%',
@@ -63,6 +132,7 @@
                     stack: '总量',  //组合名称，双数值轴时无效，多组数据的堆积图时使用，eg：stack:'group1'，则series数组中stack值等于'group1'的数据做堆积计算   （适用于折线图，柱状图）
                     data: data.Y_data[legend[0]]  //数据
                 },
+<<<<<<< HEAD
                 {
                     name: legend[1],
                     type: 'line',
@@ -98,4 +168,12 @@
         myEchart.setOption(option); 
     }
     echart(linedata,linelegend);
+=======
+                data: [null, null, null, null, null, null, null]
+            }
+        ]
+    };
+
+    lineChart.setOption(option);
+>>>>>>> xiaoxpkuo/master
 </script>
