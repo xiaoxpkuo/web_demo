@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>弹窗demo</title>
+    <script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/modal.js"></script>
+    <link href="css/modal.css" rel="stylesheet" />
+    <link href="../reset.css" rel="stylesheet" />
+</head>
+<body>
+<div id="content">
+    <h2 class="demoTitle">弹窗 demo </h2>
+    <button class="modalDemo" data-toggle="modal" data-target="#myModal">弹窗 demo 出来</button>
+    <!-- （Modal） -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"     aria-hidden="true" data-backdrop="static">
+        <form role="form" id="web_demo_form" autocomplete="off" class="form-horizontal" style="">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" 
+                            aria-hidden="true">×</button>
+                        <h4 class="modal-title" id="myModalLabel">弹窗 demo 的标题</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="alert alert-danger">
+                            这里是一个红色提示消息，这里是一个红色提示消息，这里是一个红色提示消息，这里是一个红色提示消息，这里是一个红色提示消息，这里是一个红色提示消息，这里是一个红色提示消息。
+                        </div>
+                        <div class="form-group clearfix">
+                            <label class="col-xs-3 text-right control-label">登录名称：</label>
+                            <div class="col-xs-5">
+                                <input type="text" placeholder="请输入登录名" class="form-control" name="name" autocomplete="off" id="name" value="">
+                            </div>
+                            <div class="col-xs-3">
+                                <span class="help-block" target="name" id="NameErrorMessage"></span>
+                            </div>
+                        </div>
+                        <div class="form-group clearfix">
+                            <label class="col-xs-3 text-right control-label">登录密码：</label>
+                            <div class="col-xs-5">
+                                <input type="password" autocomplete="off" placeholder="请输入登录密码" class="form-control" name="password" id="password">
+                            </div>
+                            <div class="col-xs-3">
+                                <span class="help-block" target="password" id="psErrorMessage"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <div class="col-xs-7">
+                            <span class="help-block puii-left text-left" target="tips" style="display: none;"></span>
+                        </div>
+                        <div class="col-xs-5">
+                            <input type="submit" class="btn" id="" value="取消" data-dismiss="modal">
+                            <input type="submit" class="btn btn-primary" id="fresh-mark" value="确认">
+                        </div>
+                    </div>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+        </form>
+    </div><!-- /.modal -->
+</div>
+</body>
+</html>
