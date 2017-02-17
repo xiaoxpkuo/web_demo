@@ -1,8 +1,8 @@
-正式项目使用的jquery版本：1.11.1
+#正式项目使用的jquery版本：1.11.1
 
 
-基本选择器
- #id
+#基本选择器
+ id
  element
  .class
  parent > child
@@ -16,11 +16,11 @@
  :disable
  :select
 
-css类
+#css类
  addClass()
  removeClass()
 
-属性
+#属性
  attr()
  prop()
  remove()
@@ -28,20 +28,20 @@ css类
  text([val|fn])
  val([val|fn|arr])
  
-CSS
+#CSS
  css(name|pro|[,val|fn])
  height([val|fn])
  width([val|fn])
  
-对象访问
+#对象访问
  each()
 
-效果
+#效果
  show()
  hide()
  animate()
 
-事件
+#事件
  on()
  off()
  trigger()
@@ -54,11 +54,11 @@ CSS
  mouseenter()
  scroll()
 
-ajax请求
+#ajax请求
  $.ajax()
  $.get()
 
-文档处理
+#文档处理
  append()
  after()
  before()
